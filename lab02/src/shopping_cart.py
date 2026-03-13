@@ -1,5 +1,6 @@
-from lab02.src.product import Product
-from lab02.src.discount import Discount
+from src.product import Product
+from src.discount import Discount
+from typing import Optional
 
 class LineItem:
     def __init__(self, product: Product, quantity: int):
@@ -13,9 +14,9 @@ class ShoppingCart:
     def add_item(self, product:Product, quantity:int) -> None:
         if product is None or quantity <=0:
             raise ValueError("Product and quantity must be positive")
-        self.item.append(LineItem(Product, quantity))
+        self.items.append(LineItem(product, quantity))
 
-    def calculate_total(self, discount: Discount | None) -> float:
+    def calculate_total(self, discount: Optional[Discount]) -> float:
         subtotal = sum(
             line.product.price * line.quantity for line in self.items
             )
